@@ -6,14 +6,37 @@
  */
 import '@/styles/globals.css';
 
+import { QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { queryClient } from '@/lib/query-client';
+import { trpc, trpcClient, TRPCProvider } from '@/lib/trpc';
 import { routeTree } from '@/routeTree.gen';
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({
+  Wrap: function WrapComponent({ children }) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TRPCProvider queryClient={queryClient} trpcClient={trpcClient}>
+          {children}
+        </TRPCProvider>
+      </QueryClientProvider>
+    );
+  },
+  context: {
+    queryClient,
+    trpc,
+  },
+  defaultPreload: 'intent',
+  // Since we're using React Query, we don't want loader calls to ever be stale
+  // This will ensure that the loader is always called when the route is preloaded or visited
+  defaultPreloadStaleTime: 0,
+  routeTree,
+  scrollRestoration: true,
+});
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
