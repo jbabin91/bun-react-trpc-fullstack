@@ -1,4 +1,10 @@
 {
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
@@ -7,5 +13,9 @@
   },
   "search.exclude": {
     "**/routeTree.gen.ts": true
-  }
+  },
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.autoImportFileExcludePatterns": [],
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

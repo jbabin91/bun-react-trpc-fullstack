@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { APITester } from '../components/APITester';
 
-import logo from '../assets/logo.svg';
-import reactLogo from '../assets/react.svg';
+import logo from '@/assets/logo.svg';
+import reactLogo from '@/assets/react.svg';
+import { APITester } from '@/components/api-tester';
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -12,8 +12,8 @@ export function Home() {
   return (
     <div className="app">
       <div className="logo-container">
-        <img src={logo} alt="Bun Logo" className="logo bun-logo" />
-        <img src={reactLogo} alt="React Logo" className="logo react-logo" />
+        <img alt="Bun Logo" className="logo bun-logo" src={logo} />
+        <img alt="React Logo" className="logo react-logo" src={reactLogo} />
       </div>
 
       <h1>Bun + React</h1>

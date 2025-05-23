@@ -11,16 +11,23 @@
     "format": "prettier -uwl --cache .",
     "format:check": "prettier -uc --cache .",
     "generate-routes": "tsr generate",
+    "lint": "eslint . --max-warnings 0 --cache --cache-location ./node_modules/.cache/eslint",
+    "lint:fix": "eslint . --fix --cache --cache-location ./node_modules/.cache/eslint",
     "start": "NODE_ENV=production bun src/index.tsx",
     "watch-routes": "tsr watch"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.76.2",
     "@tanstack/react-router": "^1.120.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.7"
   },
   "devDependencies": {
+    "@eslint-react/eslint-plugin": "^1.49.0",
+    "@tanstack/eslint-plugin-query": "^5.74.7",
+    "@tanstack/eslint-plugin-router": "^1.115.0",
+    "@tanstack/react-query-devtools": "^5.76.2",
     "@tanstack/react-router-devtools": "^1.120.7",
     "@tanstack/router-cli": "^1.120.7",
     "@types/bun": "latest",
@@ -28,8 +35,23 @@
     "@types/react-dom": "^19.1.5",
     "bun-plugin-tailwind": "^0.0.15",
     "concurrently": "^9.1.2",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-import-x": "^4.12.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "eslint-plugin-unicorn": "^59.0.1",
+    "globals": "^16.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.14",
-    "prettier-plugin-tailwindcss": "^0.6.11"
-  }
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript-eslint": "^8.32.1"
+  },
+  "trustedDependencies": [
+    "esbuild",
+    "unrs-resolver"
+  ]
 }
