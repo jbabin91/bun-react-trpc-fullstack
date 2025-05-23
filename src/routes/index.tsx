@@ -1,9 +1,14 @@
-import { APITester } from "./APITester";
+import { createFileRoute } from "@tanstack/react-router";
+import { APITester } from "../components/APITester";
 
-import logo from "./assets/logo.svg";
-import reactLogo from "./assets/react.svg";
+import logo from "../assets/logo.svg";
+import reactLogo from "../assets/react.svg";
 
-export function App() {
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+export function Home() {
   return (
     <div className="app">
       <div className="logo-container">
@@ -19,5 +24,3 @@ export function App() {
     </div>
   );
 }
-
-export default App;
