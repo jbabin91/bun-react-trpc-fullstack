@@ -12,6 +12,11 @@ const server = serve({
     hmr: true,
   },
 
+  error(error) {
+    console.error(error);
+    return new Response('Internal Server Error', { status: 500 });
+  },
+
   routes: {
     // Serve index.html for all unmatched routes.
     '/*': index,
