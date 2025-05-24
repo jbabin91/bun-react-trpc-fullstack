@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test';
 
 import { testUtils } from '@/test/setup';
 
-import { UserRepository } from './users';
+import { UserRepository } from './repository';
 
 describe('UserRepository', () => {
   test('should find all users', async () => {

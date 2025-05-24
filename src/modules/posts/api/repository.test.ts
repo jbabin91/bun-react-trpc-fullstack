@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 
-import { UserRepository } from '@/server/routers/users';
+import { UserRepository } from '@/modules/users/api/repository';
 import { testUtils } from '@/test/setup';
 
 import { PostRepository } from './repository';
