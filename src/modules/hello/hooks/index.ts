@@ -5,16 +5,16 @@ import { useTRPC, useTRPCClient } from '@/lib/trpc';
 import type { HelloInput, UpdateHelloInput } from '../schemas';
 
 // Query hooks
-export const useHello = (input?: HelloInput) => {
+export function useHello(input?: HelloInput) {
   const trpc = useTRPC();
 
   const queryInput = input ?? { method: 'GET' as const };
 
   return useQuery(trpc.hello.hello.queryOptions(queryInput));
-};
+}
 
 // Mutation hooks
-export const useUpdateHello = () => {
+export function useUpdateHello() {
   const trpc = useTRPC();
   const trpcClient = useTRPCClient();
 
@@ -24,4 +24,4 @@ export const useUpdateHello = () => {
     },
     ...trpc.hello.updateHello.mutationOptions(),
   });
-};
+}

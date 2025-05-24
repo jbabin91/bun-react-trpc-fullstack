@@ -3,25 +3,25 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTRPC } from '@/lib/trpc';
 
 // Query hooks
-export const useUsers = () => {
+export function useUsers() {
   const trpc = useTRPC();
   return useQuery(trpc.users.list.queryOptions());
-};
+}
 
-export const useUser = (id: string) => {
+export function useUser(id: string) {
   const trpc = useTRPC();
   return useQuery(trpc.users.getById.queryOptions({ id }, { enabled: !!id }));
-};
+}
 
-export const useUserWithPosts = (id: string) => {
+export function useUserWithPosts(id: string) {
   const trpc = useTRPC();
   return useQuery(
     trpc.users.getUserWithPosts.queryOptions({ id }, { enabled: !!id }),
   );
-};
+}
 
 // Mutation hooks
-export const useCreateUser = () => {
+export function useCreateUser() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
@@ -35,9 +35,9 @@ export const useCreateUser = () => {
       },
     }),
   );
-};
+}
 
-export const useUpdateUser = () => {
+export function useUpdateUser() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
@@ -59,9 +59,9 @@ export const useUpdateUser = () => {
       },
     }),
   );
-};
+}
 
-export const useDeleteUser = () => {
+export function useDeleteUser() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
@@ -75,10 +75,10 @@ export const useDeleteUser = () => {
       },
     }),
   );
-};
+}
 
 // Combined hooks for complex operations
-export const useUsersData = () => {
+export function useUsersData() {
   const usersQuery = useUsers();
   const createMutation = useCreateUser();
   const updateMutation = useUpdateUser();
@@ -95,4 +95,4 @@ export const useUsersData = () => {
     updateUser: updateMutation.mutate,
     users: usersQuery.data ?? [],
   };
-};
+}

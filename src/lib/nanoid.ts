@@ -8,8 +8,13 @@ const alphabet = '123456789ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 export const nanoid = customAlphabet(alphabet, 12);
 
 // Optional: Create specific ID generators for different entity types
-export const createUserId = () => `user_${nanoid()}`;
-export const createPostId = () => `post_${nanoid()}`;
+export function createUserId() {
+  return `user_${nanoid()}`;
+}
+
+export function createPostId() {
+  return `post_${nanoid()}`;
+}
 
 // Generic ID generator (default)
 export const createId = nanoid;

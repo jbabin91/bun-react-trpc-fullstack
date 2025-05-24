@@ -3,33 +3,33 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useTRPC } from '@/lib/trpc';
 
 // Query hooks
-export const usePosts = () => {
+export function usePosts() {
   const trpc = useTRPC();
   return useQuery(trpc.posts.list.queryOptions());
-};
+}
 
-export const usePost = (id: string) => {
+export function usePost(id: string) {
   const trpc = useTRPC();
   return useQuery(trpc.posts.getById.queryOptions({ id }));
-};
+}
 
-export const usePostsByAuthor = (authorId: string) => {
+export function usePostsByAuthor(authorId: string) {
   const trpc = useTRPC();
   return useQuery(trpc.posts.getByAuthor.queryOptions({ authorId }));
-};
+}
 
-export const usePostsWithAuthors = () => {
+export function usePostsWithAuthors() {
   const trpc = useTRPC();
   return useQuery(trpc.posts.getPostsWithAuthors.queryOptions());
-};
+}
 
-export const usePostCount = () => {
+export function usePostCount() {
   const trpc = useTRPC();
   return useQuery(trpc.posts.getCount.queryOptions());
-};
+}
 
 // Mutation hooks
-export const useCreatePost = () => {
+export function useCreatePost() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
@@ -49,9 +49,9 @@ export const useCreatePost = () => {
       },
     }),
   );
-};
+}
 
-export const useUpdatePost = () => {
+export function useUpdatePost() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
@@ -71,9 +71,9 @@ export const useUpdatePost = () => {
       },
     }),
   );
-};
+}
 
-export const useDeletePost = () => {
+export function useDeletePost() {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
@@ -93,10 +93,10 @@ export const useDeletePost = () => {
       },
     }),
   );
-};
+}
 
 // Combined hooks for complex operations
-export const usePostsData = () => {
+export function usePostsData() {
   const postsQuery = usePosts();
   const countQuery = usePostCount();
 
@@ -106,4 +106,4 @@ export const usePostsData = () => {
     isLoading: postsQuery.isLoading ?? countQuery.isLoading,
     posts: postsQuery.data,
   };
-};
+}

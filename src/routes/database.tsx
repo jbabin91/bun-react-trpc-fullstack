@@ -88,7 +88,7 @@ function DatabaseDemo() {
     }),
   );
 
-  const handleCreateUser = (e: React.FormEvent) => {
+  function handleCreateUser(e: React.FormEvent) {
     e.preventDefault();
     if (newUserName && newUserEmail) {
       createUserMutation.mutate({
@@ -96,9 +96,9 @@ function DatabaseDemo() {
         name: newUserName,
       });
     }
-  };
+  }
 
-  const handleCreatePost = (e: React.FormEvent) => {
+  function handleCreatePost(e: React.FormEvent) {
     e.preventDefault();
     if (newPostTitle && newPostContent && selectedAuthorId) {
       createPostMutation.mutate({
@@ -107,7 +107,7 @@ function DatabaseDemo() {
         title: newPostTitle,
       });
     }
-  };
+  }
 
   return (
     <div className="container mx-auto space-y-8 p-6">

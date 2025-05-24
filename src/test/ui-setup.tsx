@@ -37,7 +37,7 @@ export function createTestQueryClient(): QueryClient {
 }
 
 // Create a mock tRPC client for testing that matches the expected serverHelpers structure
-const createMockTrpcClient = () => {
+function createMockTrpcClient() {
   // Create a more complete mock that matches the serverHelpers structure
   return {
     hello: {
@@ -77,7 +77,7 @@ const createMockTrpcClient = () => {
       }),
     },
   } as any; // Type assertion for testing compatibility
-};
+}
 
 // Default mock client instance
 const mockTrpcClient = createMockTrpcClient();
