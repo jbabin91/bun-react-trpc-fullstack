@@ -50,6 +50,9 @@ export function APITester() {
   const testEndpoint = (values: z.infer<typeof formSchema>) => {
     const { method, name } = values;
 
+    // Clear any previous errors
+    updateHelloMutation.reset();
+
     const apiCall = async () => {
       setIsLoading(true);
       try {
@@ -149,13 +152,6 @@ export function APITester() {
           </div>
         </form>
       </Form>
-
-      {/* Show errors */}
-      {/* {updateHelloMutation.error && (
-        <div className="error-indicator">
-          Error: {updateHelloMutation.error?.message ?? 'Unknown error'}
-        </div>
-      )} */}
 
       <Textarea
         ref={responseInputRef}
