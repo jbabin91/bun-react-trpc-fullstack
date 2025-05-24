@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["bun"]
+nixPkgs = ["bun", "unzip"]
 aptPkgs = ["build-essential"]
 
 [phases.install]
