@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import logo from '@/assets/logo.svg';
 import reactLogo from '@/assets/react.svg';
-import { APITester } from '@/components/api-tester';
+import { APITester } from '@/modules/hello/components/api-tester';
 
 export const Route = createFileRoute('/')({
   component: Home,

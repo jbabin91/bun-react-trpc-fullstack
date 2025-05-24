@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -22,7 +21,8 @@ import {
 } from '@/components/ui/select';
 import { toast } from '@/components/ui/sonner';
 import { Textarea } from '@/components/ui/textarea';
-import { useTRPC, useTRPCClient } from '@/lib/trpc';
+import { useTRPCClient } from '@/lib/trpc';
+import { useUpdateHello } from '@/modules/hello/hooks';
 
 const formSchema = z.object({
   method: z.enum(['GET', 'PUT']),
@@ -30,13 +30,12 @@ const formSchema = z.object({
 });
 
 export function APITester() {
-  const trpc = useTRPC();
   const trpcClient = useTRPCClient();
   const responseInputRef = useRef<HTMLTextAreaElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mutation for PUT requests
-  const updateHelloMutation = useMutation(trpc.updateHello.mutationOptions());
+  // Mutation for PUT requests using our new hook with proper input validation
+  const updateHelloMutation = useUpdateHello();
 
   // Form setup
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,7 +59,7 @@ export function APITester() {
 
         if (method === 'GET') {
           // Use the tRPC client directly for GET requests
-          result = await trpcClient.hello.query({
+          result = await trpcClient.hello.hello.query({
             method: 'GET',
             name: name ?? undefined,
           });

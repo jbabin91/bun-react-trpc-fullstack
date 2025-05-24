@@ -41,13 +41,24 @@ const createMockTrpcClient = () => {
   // Create a more complete mock that matches the serverHelpers structure
   return {
     hello: {
-      queryFilter: () => ({ queryKey: ['hello'] }),
-      queryKey: () => ['hello'],
-      queryOptions: () => ({
-        queryFn: () =>
-          Promise.resolve({ message: 'Hello Test', method: 'GET' as const }),
-        queryKey: ['hello'],
-      }),
+      hello: {
+        queryFilter: () => ({ queryKey: ['hello', 'hello'] }),
+        queryKey: () => ['hello', 'hello'],
+        queryOptions: () => ({
+          queryFn: () =>
+            Promise.resolve({ message: 'Hello Test', method: 'GET' as const }),
+          queryKey: ['hello', 'hello'],
+        }),
+      },
+      updateHello: {
+        mutationOptions: () => ({
+          mutationFn: () =>
+            Promise.resolve({
+              message: 'Hello Test Updated',
+              method: 'PUT' as const,
+            }),
+        }),
+      },
     },
     posts: {
       getAll: {
