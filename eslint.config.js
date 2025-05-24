@@ -59,7 +59,10 @@ export default tseslint.config(
             kebabCase: true,
             pascalCase: false,
           },
-          ignore: [String.raw`^\$.*\.tsx?$`], // Allow parameter files starting with $
+          ignore: [
+            String.raw`^\$.*\.tsx?$`, // Allow parameter files starting with $
+            String.raw`^-.*\.tsx?$`, // Allow route files starting with - (ignored by TanStack Router)
+          ],
         },
       ],
       'unicorn/no-null': 'off',

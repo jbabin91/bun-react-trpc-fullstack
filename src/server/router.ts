@@ -1,5 +1,6 @@
 import { z } from 'zod/v4';
 
+import { postsRouter, usersRouter } from './routers';
 import { publicProcedure, router } from './trpc';
 
 export const appRouter = router({
@@ -18,6 +19,7 @@ export const appRouter = router({
         method: input.method,
       };
     }),
+  posts: postsRouter,
   updateHello: publicProcedure
     .input(
       z.object({
@@ -34,6 +36,7 @@ export const appRouter = router({
         method: 'PUT',
       };
     }),
+  users: usersRouter,
 });
 
 export type AppRouter = typeof appRouter;

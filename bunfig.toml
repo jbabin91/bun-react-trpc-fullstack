@@ -1,3 +1,12 @@
 [serve.static]
 env = "BUN_PUBLIC_*"
+preload = ["./node_modules/bun-plugin-dotenvx/dist/index.js"]
 plugins = ["bun-plugin-tailwind"]
+
+[test]
+preload = [
+  "./src/test/setup.ts",
+  "./src/test/happydom.ts",
+  "./src/test/ui-setup.tsx",
+]
+# coverage = true # Optional: uncomment to enable coverage reporting

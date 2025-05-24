@@ -6,34 +6,23 @@
  */
 import '@/styles/globals.css';
 
-import { QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
-import { ThemeProvider } from 'next-themes';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { Toaster } from '@/components/ui/sonner';
 import { queryClient } from '@/lib/query-client';
-import { trpc, trpcClient, TRPCProvider } from '@/lib/trpc';
+import { serverHelpers } from '@/lib/trpc';
+import { Providers } from '@/providers';
 import { routeTree } from '@/routeTree.gen';
 
 // Create a new router instance
 const router = createRouter({
   Wrap: function WrapComponent({ children }) {
-    return (
-      <ThemeProvider enableSystem attribute="class" defaultTheme="system">
-        <QueryClientProvider client={queryClient}>
-          <TRPCProvider queryClient={queryClient} trpcClient={trpcClient}>
-            {children}
-            <Toaster />
-          </TRPCProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    );
+    return <Providers>{children}</Providers>;
   },
   context: {
     queryClient,
-    trpc,
+    trpc: serverHelpers,
   },
   defaultPreload: 'intent',
   // Since we're using React Query, we don't want loader calls to ever be stale

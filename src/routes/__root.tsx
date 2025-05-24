@@ -30,6 +30,9 @@ function RootComponent() {
           </Link>{' '}
           <Link className="[&.active]:font-bold" to="/about">
             About
+          </Link>{' '}
+          <Link className="[&.active]:font-bold" to="/database">
+            Database
           </Link>
         </nav>
         <ModeToggle />
