@@ -15,8 +15,13 @@
     "**/routeTree.gen.ts": true
   },
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.preferences.autoImportFileExcludePatterns": [],
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "recharts",
+    "react-day-picker",
+    "radix-ui",
+    "^lucide-react/dist/lucide-react.suffixed$",
+    "sonner"
+  ],
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.experimental.useTsgo": false
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

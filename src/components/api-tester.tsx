@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { type FormEvent, useRef, useState } from 'react';
 
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 import { useTRPC, useTRPCClient } from '@/lib/trpc';
 
 export function APITester() {
@@ -69,29 +71,21 @@ export function APITester() {
           placeholder="Enter name (optional)"
           type="text"
         />
-        <button className="send-button" disabled={isLoading} type="submit">
+        <Button disabled={isLoading} type="submit">
           {isLoading ? 'Loading...' : 'Send'}
-        </button>
+        </Button>
       </form>
 
-      {/* Show loading state */}
-      {isLoading && (
-        <div className="loading-indicator">
-          Testing {selectedMethod} request...
-        </div>
-      )}
-
       {/* Show errors */}
-      {updateHelloMutation.error && (
+      {/* {updateHelloMutation.error && (
         <div className="error-indicator">
           Error: {updateHelloMutation.error?.message ?? 'Unknown error'}
         </div>
-      )}
+      )} */}
 
-      <textarea
+      <Textarea
         ref={responseInputRef}
         readOnly
-        className="response-area"
         placeholder="Response will appear here..."
       />
     </div>

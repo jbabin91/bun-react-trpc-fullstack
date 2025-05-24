@@ -8,9 +8,11 @@ import '@/styles/globals.css';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { ThemeProvider } from 'next-themes';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { Toaster } from '@/components/ui/sonner';
 import { queryClient } from '@/lib/query-client';
 import { trpc, trpcClient, TRPCProvider } from '@/lib/trpc';
 import { routeTree } from '@/routeTree.gen';
@@ -19,11 +21,14 @@ import { routeTree } from '@/routeTree.gen';
 const router = createRouter({
   Wrap: function WrapComponent({ children }) {
     return (
-      <QueryClientProvider client={queryClient}>
-        <TRPCProvider queryClient={queryClient} trpcClient={trpcClient}>
-          {children}
-        </TRPCProvider>
-      </QueryClientProvider>
+      <ThemeProvider enableSystem attribute="class" defaultTheme="system">
+        <QueryClientProvider client={queryClient}>
+          <TRPCProvider queryClient={queryClient} trpcClient={trpcClient}>
+            {children}
+            <Toaster />
+          </TRPCProvider>
+        </QueryClientProvider>
+      </ThemeProvider>
     );
   },
   context: {

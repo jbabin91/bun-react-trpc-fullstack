@@ -8,6 +8,7 @@ import {
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query';
 
+import { ModeToggle } from '@/components/mode-toggle';
 import { type AppRouter } from '@/server/router';
 
 type RouterContext = {
@@ -22,15 +23,17 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 function RootComponent() {
   return (
     <>
-      <div className="flex gap-2 p-2">
-        <Link className="[&.active]:font-bold" to="/">
-          Home
-        </Link>{' '}
-        <Link className="[&.active]:font-bold" to="/about">
-          About
-        </Link>
-      </div>
-      <hr />
+      <header className="flex flex-row items-center justify-between border-b p-2">
+        <nav className="flex gap-2">
+          <Link className="[&.active]:font-bold" to="/">
+            Home
+          </Link>{' '}
+          <Link className="[&.active]:font-bold" to="/about">
+            About
+          </Link>
+        </nav>
+        <ModeToggle />
+      </header>
       <Outlet />
       <ReactQueryDevtools />
       <TanStackRouterDevtools />

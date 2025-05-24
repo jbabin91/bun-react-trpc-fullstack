@@ -131,6 +131,7 @@ export default tseslint.config(
       ...pluginReactHooks.configs.recommended.rules,
       ...pluginJsxA11y.flatConfigs.recommended.rules,
       '@eslint-react/dom/no-dangerously-set-innerhtml': 'off',
+      '@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
       '@eslint-react/no-arrow-function-lifecycle': 'off',
       '@eslint-react/no-context-provider': 'off',
       '@eslint-react/no-nested-component-definitions': 'off',
