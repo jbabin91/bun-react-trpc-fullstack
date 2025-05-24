@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'bun:test';
 
+import { UserRepository } from '@/server/routers/users';
 import { testUtils } from '@/test/setup';
 
-import { PostRepository } from './posts';
-import { UserRepository } from './users';
+import { PostRepository } from './repository';
 
 describe('PostRepository', () => {
   test('should find all posts', async () => {

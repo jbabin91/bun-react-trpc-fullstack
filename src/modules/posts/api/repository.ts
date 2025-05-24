@@ -1,15 +1,7 @@
 import { count, desc, eq } from 'drizzle-orm';
-import { z } from 'zod/v4';
 
 import { db } from '@/db';
-import {
-  insertPostSchema,
-  type NewPost,
-  type Post,
-  posts,
-} from '@/db/schema/posts';
-
-import { publicProcedure, router } from '../trpc';
+import { type NewPost, type Post, posts } from '@/db/schema/posts';
 
 // Post repository operations
 export class PostRepository {
@@ -74,59 +66,3 @@ export class PostRepository {
     return result[0].count;
   }
 }
-
-// Posts router
-export const postsRouter = router({
-  create: publicProcedure
-    .input(
-      insertPostSchema.omit({ createdAt: true, id: true, updatedAt: true }),
-    )
-    .mutation(async ({ input }) => {
-      return await PostRepository.create(input);
-    }),
-
-  delete: publicProcedure
-    .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
-      await PostRepository.delete(input.id);
-      return { success: true };
-    }),
-
-  getByAuthor: publicProcedure
-    .input(z.object({ authorId: z.string() }))
-    .query(async ({ input }) => {
-      return await PostRepository.findByAuthor(input.authorId);
-    }),
-
-  getById: publicProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      return await PostRepository.findById(input.id);
-    }),
-
-  getCount: publicProcedure.query(async () => {
-    const count = await PostRepository.getPostCount();
-    return { count };
-  }),
-
-  getPostsWithAuthors: publicProcedure.query(async () => {
-    return await PostRepository.getPostsWithAuthors();
-  }),
-
-  list: publicProcedure.query(async () => {
-    return await PostRepository.findAll();
-  }),
-
-  update: publicProcedure
-    .input(
-      z.object({
-        data: insertPostSchema
-          .omit({ createdAt: true, id: true, updatedAt: true })
-          .partial(),
-        id: z.string(),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      return await PostRepository.update(input.id, input.data);
-    }),
-});

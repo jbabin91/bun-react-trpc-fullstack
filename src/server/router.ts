@@ -1,6 +1,8 @@
 import { z } from 'zod/v4';
 
-import { postsRouter, usersRouter } from './routers';
+import { postsRouter } from '@/modules/posts/api/router';
+
+import { usersRouter } from './routers';
 import { publicProcedure, router } from './trpc';
 
 export const appRouter = router({

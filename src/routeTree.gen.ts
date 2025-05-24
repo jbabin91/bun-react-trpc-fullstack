@@ -11,11 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PostsImport } from './routes/posts'
 import { Route as DatabaseImport } from './routes/database'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const PostsRoute = PostsImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DatabaseRoute = DatabaseImport.update({
   id: '/database',
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DatabaseImport
       parentRoute: typeof rootRoute
     }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/database': typeof DatabaseRoute
+  '/posts': typeof PostsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/database': typeof DatabaseRoute
+  '/posts': typeof PostsRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/database': typeof DatabaseRoute
+  '/posts': typeof PostsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/database'
+  fullPaths: '/' | '/about' | '/database' | '/posts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/database'
-  id: '__root__' | '/' | '/about' | '/database'
+  to: '/' | '/about' | '/database' | '/posts'
+  id: '__root__' | '/' | '/about' | '/database' | '/posts'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   DatabaseRoute: typeof DatabaseRoute
+  PostsRoute: typeof PostsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   DatabaseRoute: DatabaseRoute,
+  PostsRoute: PostsRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/database"
+        "/database",
+        "/posts"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/database": {
       "filePath": "database.tsx"
+    },
+    "/posts": {
+      "filePath": "posts.tsx"
     }
   }
 }
